@@ -69,3 +69,41 @@ Input: height = [1,8,6,2,5,4,8,3,7]
 Output: 49
 """
 ```
+
+### 15. 3Sum
+* Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+```
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        Set<List<Integer>> s=new HashSet<>();
+        List<List<Integer>> result=new ArrayList<>();
+        for(int i=0; i<nums.length; i++){
+            int j=i+1; 
+            int k=nums.length-1;
+            while(j<k){
+                int sum=nums[i] + nums[j] + nums[k];
+                if(sum == 0){
+                    s.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    j++;
+                    k--;
+                }
+                else if(sum < 0){
+                    j++;
+                }
+                else{
+                    k--;
+                }
+            }
+        }
+        result.addAll(s);
+        return result;
+    }
+}
+"""
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+"""
+```
