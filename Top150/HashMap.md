@@ -83,3 +83,54 @@ Input: s = "foo", t = "bar"
 Output: false
 """
 ```
+
+### 
+* **brute force**
+```
+import java.util.*;
+public class Main{
+    public static boolean isomorphic(String p, String[] words){
+        int[] pCount=new int[256];
+        String[] sCount=new String[256];
+        Arrays.fill(pCount, -1);
+        Arrays.fill(sCount, null);
+        for(int i=0; i<p.length(); i++){
+            char pChar=p.charAt(i);
+            String sWord=words[i];
+            if(pCount[pChar]==-1 && sCount[pChar]==null){
+                pCount[pChar] = i;
+                sCount[pChar]=sWord;
+            }
+            else{
+                if(!sWord.equals(sCount[pChar])){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args){
+        Scanner input=new Scanner(System.in);
+        
+        String p=input.next();
+        input.nextLine();
+        String s=input.nextLine(); 
+        String[] words=s.split(" ");
+        if(isomorphic(p, words)){
+            System.out.printf("yes");
+        }
+        else{
+            System.out.printf("No");
+        }
+    }
+}
+"""
+abba
+dog cat cat dog
+yes
+"""
+```
+
+* **Optimized**
+  
+
