@@ -58,3 +58,62 @@ void main(){
     }
 }
 ```
+
+### Leetcode_76. Minimum Window Substring
+```
+class Solution {
+    public boolean check(String str, String t, int s, int e){
+        for(int i=0; i<t.length(); i++){
+            int found=0;
+            for(int j=s; j<=e; j++){
+                if(t.charAt(i) == str.charAt(j)){
+                    found=1;
+                    break;
+                }
+            }
+            if(found==0){
+                return false;
+            }
+        }
+        return true;
+    }
+    public String minWindow(String s, String t) {
+        String result="";
+        if(s.length()<t.length()) return result;
+
+        int l=s.length();
+        int minLen=Integer.MAX_VALUE, startIndex=0;
+        for(int i=0; i<l; i++){
+            for(int j=i; j<l; j++){
+                int currLen=j-i+1;
+                if(check(s, t, i, j)){
+                    if(currLen < minLen){
+                        minLen=currLen;
+                        startIndex=i;
+                    }
+                }
+            }
+        }
+        for(int i=startIndex; i<startIndex+minLen; i++){
+            result=result + s.charAt(i);
+        }
+        return result;
+    }
+}
+"""
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+Example 2:
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+Example 3:
+
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+"""
+```
